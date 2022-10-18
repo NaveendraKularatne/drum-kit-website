@@ -1,15 +1,22 @@
+//detecting mouse press
+
 var noOfElements = document.querySelectorAll(".drum").length;
 
 for (var i = 0; i<noOfElements; i++) {
 	document.querySelectorAll(".drum")[i].addEventListener("click", function() {
+		
 		var buttonInnerHTML = this.innerHTML;
+
 		makeSound(buttonInnerHTML);
+		buttonAnimation(buttonInnerHTML);
 });
 }
 
+//detecting keyboard press
 document.addEventListener("keydown", (event)=> {
 
 	makeSound(event.key);
+	buttonAnimation(event.key);
 });
 
 function makeSound(key) {
@@ -53,3 +60,18 @@ function makeSound(key) {
 		console.log(buttonInnerHTML);
 	}
 }
+
+//Adding animations to the buttons (musical instruments)
+function buttonAnimation (currentKey) {
+
+	var activeButton = document.querySelector("." + currentKey);
+
+	activeButton.classList.add("pressed"); //Check styles sheet for the pressed class
+
+	//Now we have to remove this class from the selected element after some time
+
+	setTimeout(function() {
+		activeButton.classList.remove("pressed");
+	}, 100);	
+}
+
